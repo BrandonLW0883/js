@@ -47,7 +47,7 @@ class level05 extends Phaser.Scene {
 
 
       // Add background music
- this.backgroundMusic = this.sound.add('pixel.mp3', { loop: true });
+ this.backgroundMusic = this.sound.add('japanese.mp3', { loop: true });
  this.backgroundMusic.play();
 
 
