@@ -204,8 +204,8 @@ class level02 extends Phaser.Scene {
 
 
  this.physics.add.overlap(this.player, this.shirt, this.hitshirt, null, this);
- this.physics.add.overlap(this.player, this.shirt2, this.hitshirt2, null, this);
- this.physics.add.overlap(this.player, this.shirt3, this.hitshirt3, null, this);
+ this.physics.add.overlap(this.player, this.shirt2, this.hitshirt, null, this);
+ this.physics.add.overlap(this.player, this.shirt3, this.hitshirt, null, this);
   // Create the 'KE' enemy sprite
   let x = 240;
   let y = 233;
@@ -305,7 +305,8 @@ this.tweens.add({
       if (
         this.player.x > 615 &&
         this.player.y > 118 &&
-        this.player.y < 176
+        this.player.y < 176 &&
+        window.shirt > 2
     ) {
         console.log("Door2");
         this.level3();
@@ -320,23 +321,11 @@ this.tweens.add({
         console.log("Hit shirt!!!");
         this.sound.play('collect');
         this.cameras.main.shake(0);
+        window.shirt++
         item.disableBody(true, true); // remove shirt
         return false;
       }
-      hitshirt2(player, item) {
-        console.log("Hit shirt2!!!");
-        this.sound.play('collect');
-        this.cameras.main.shake(0);
-        item.disableBody(true, true); // remove shirt
-        return false;
-      }
-      hitshirt3(player, item) {
-        console.log("Hit shirt3!!!");
-        this.sound.play('collect');
-        this.cameras.main.shake(0);
-        item.disableBody(true, true); // remove shirt
-        return false;
-      }
+      
       
     hitEnemy(player, enemy) {
         console.log("Hit enemy!!!");
