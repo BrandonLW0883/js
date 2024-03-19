@@ -21,6 +21,6 @@ var config = {
 };
 
 var game = new Phaser.Game(config);
-
+window.shirt=0
 
 

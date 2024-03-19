@@ -2,6 +2,8 @@ class level01 extends Phaser.Scene {
   constructor ()
   {
       super({ key: 'level01' });
+      this.musicPlaying = false; // Variable to track music state
+    
   }
 
   preload() {
@@ -17,6 +19,8 @@ this.load.audio('pixel.mp3', ['assets/pixel.mp3', 'assets/pixel.png']);
 
 this.load.spritesheet('MC', 'assets/maincharacter.png', { frameWidth: 64, frameHeight: 64 });
 this.load.spritesheet('heart', 'assets/heart.png', { frameWidth: 64, frameHeight: 64 });
+
+
 }
 
 create() {
@@ -91,6 +95,13 @@ this.anims.create({
 // Find the starting position object
 
 // this.add.sprite(100, 300, 'heart') . play('spin').setScale(1)
+
+  if (this.musicPlaying) {
+    this.backgroundMusic = this.sound.add('pixel.mp3', { loop: true });
+    this.backgroundMusic.play();
+    this.musicPlaying = true;
+}
+
 
 var start = map.findObject("objectlayer", (obj) => obj.name === "start");
 this.player=this.physics.add.sprite(start.x, start.y, 'MC');
@@ -196,6 +207,7 @@ this.physics.add.collider(this.player, this.buildingLayer);
   
     level2(player, tile) {
       console.log("level02 function");
+      this.backgroundMusic.stop();
       this.scene.start("level02",);
     }
   }
