@@ -10,14 +10,14 @@ var config = {
             debug: true
         }
     },
-    // scale: {
-    //     mode: Phaser.Scale.FIT,
-    //     autoCenter: Phaser.Scale.CENTER_BOTH
-    // },
+     scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    },
     backgroundColor: '#000000',
     pixelArt: true,
     //// Add all scenes below in the array
-    scene: [preloadScene, level01, level02, level03, level04]
+    scene: [preloadScene, level01, level02, level03, level04, level05] 
 };
 
 var game = new Phaser.Game(config);
