@@ -1,6 +1,7 @@
 class level05 extends Phaser.Scene {
   constructor() {
       super({ key: 'level05' });
+      this.musicPlaying = false; // Variable to track music state
   }
 
   preload() {
@@ -13,6 +14,7 @@ class level05 extends Phaser.Scene {
       this.load.image("interiorimg", "assets/interior718x1214.png");
       this.load.image("clotheimg", "assets/clothes768x768.png");
       this.load.spritesheet('KE2', 'assets/karenenemy2.png', { frameWidth: 64, frameHeight: 64 });
+      this.load.audio('japanese.mp3', ['assets/japanese.mp3', 'assets/japanese.png']);
   }   
       
   create() {
@@ -41,6 +43,12 @@ class level05 extends Phaser.Scene {
       this.tableLayer = map.createLayer("table", tilesArray, 0, 0);
       this.cottonLayer = map.createLayer("cotton", tilesArray, 0, 0);
       this.clothesLayer = map.createLayer("clothes", tilesArray, 0, 0);
+
+
+
+      // Add background music
+ this.backgroundMusic = this.sound.add('pixel.mp3', { loop: true });
+ this.backgroundMusic.play();
 
 
   //this.cursors = this.input.keyboard.createCursorKeys();
@@ -124,6 +132,12 @@ this.anims.create({
     frameRate:5,
     repeat:-1
 });
+
+if (this.musicPlaying) {
+  this.backgroundMusic = this.sound.add('japanese.mp3', { loop: true });
+  this.backgroundMusic.play();
+  this.musicPlaying = true;
+}
 
 // Find the "start" object
 let start = map.findObject("ObjectLayer", (obj) => obj.name === "start");
@@ -325,6 +339,7 @@ hitEnemy(player, enemy) {
 }
 level1() {
   console.log("level01 function");
+  this.backgroundMusic.stop();
   this.scene.start("level01");
 }
 }
