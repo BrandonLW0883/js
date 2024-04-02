@@ -465,15 +465,14 @@ this.backgroundMusic.play();
  
       if (
         this.player.x > 791 &&
-         this.player.y > 819.2 && 
-         this.player.y < 821
-          )
-      window.dress > 4 &&
-       window.shirt > 5
-       window.cm > 4 
-       {
-
-  
+        this.player.y > 819.2 && 
+        this.player.y < 821 &&
+        window.dress >= 4 &&
+        window.shirt >= 5 &&
+        window.cm >= 4
+      ) {
+        console.log("Jump to winscene");
+        this.levelwin();
       }
      
     
@@ -561,11 +560,18 @@ hitEnemy(player, enemy) {
         // Add any other effects or actions you want when the player hits an enemy
         return false;
   }
-}
-  // winscene(player, tile) {
-  //   console.log("winscene function");
-  //   this.backgroundMusic.stop();
+  winscene(player, tile) {
+    console.log("winscene function");
+    this.backgroundMusic.stop();
     
-  //   this.scene.start("winscene"
-  //   )
-  // }
+    this.scene.start("winscene"
+    )
+  }
+
+  // function to jump to winning scene
+  levelwin() {
+    this.backgroundMusic.stop();
+    if (window.shirt <= 3) console.log("winscene");
+    this.scene.start("winscene");
+  }
+}
