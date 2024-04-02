@@ -25,7 +25,7 @@ class level03 extends Phaser.Scene {
 
     create() {
         console.log("animationScene");
-
+       
         // Step 3 - Create the map from main
         let map = this.make.tilemap({ key: "level3" });
 
@@ -377,8 +377,9 @@ this.tweens.add({
 });
 
 // Add background music
-this.backgroundMusic = this.sound.add('room2.mp3', { loop: true });
-this.backgroundMusic.play();
+window.backgroundMusic.stop();
+window.backgroundMusic3 = this.sound.add('room2.mp3', { loop: true });
+window.backgroundMusic3.play();
 
  // Start the countdown timer
  this.startTimer();
@@ -430,29 +431,15 @@ this.backgroundMusic.play();
    
       } // end of update //
 
-      collectshirt (player,shirt) {
-        console.log("collectshirt")
-        this.collectSnd.play();
-    
-        window.shirt
-        shirt.disableBody(true, true);
-        this.shirtCollected.setText("shirtcollected " + window.shirt );
-    }
-
-    collectdress(player,dress) {
-      console.log("collectdress")
-      this.collectSnd.play();
-  
-      window.dress
-      dress.disableBody(true, true);
-      this.dressCollected.setText("dresscollected " + window.dress );
-  }
+     
+   
 
       hitdress(player, item) {
         console.log("Hit dress!!!");
         this.sound.play('collect');
         this.cameras.main.shake(0);
         window.dress++; // Increment dress count
+        this.dressCollected.setText("dresscollected " + window.dress );
         item.disableBody(true, true); // Remove dress
         return false;
     }
@@ -492,6 +479,7 @@ this.backgroundMusic.play();
         this.sound.play('collect');
         this.cameras.main.shake(0);
         window.shirt++; // Increment shirt count
+        this.shirtCollected.setText("shirtcollected " + window.shirt );
         item.disableBody(true, true); // remove shirt
     // Create a new shirt sprite at a specific position
     let shirtSprite = this.physics.add.sprite(350, 70, "shirt");
@@ -524,6 +512,8 @@ this.backgroundMusic.play();
       enemy.disableBody(true, true); // Remove enemy
       if (window.heart < 1) {
           console.log("Jump to game over");
+          window.backgroundMusic3 .stop();
+
           this.scene.start("gameover");
       }
 
@@ -536,7 +526,7 @@ this.backgroundMusic.play();
 
       winscene(player, tile) {
         console.log("winscene function");
-        this.backgroundMusic.stop();
+        window.backgroundMusic.stop();
         this.scene.start("winscene",);
       }
    // function to jump to winning scene

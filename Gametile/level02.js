@@ -39,6 +39,15 @@ class level02 extends Phaser.Scene {
   create() {
     console.log("animationScene");
 
+        // Add background music
+
+        window.backgroundMusic.stop();
+
+        window.backgroundMusic2 = this.sound.add("room1.mp3", { loop: true });
+        window.backgroundMusic2.play();
+
+        
+
     // Create the map from the JSON file
     let map = this.make.tilemap({ key: "level2" });
 
@@ -353,9 +362,7 @@ class level02 extends Phaser.Scene {
       repeat: -1, // Repeat indefinitely
     });
 
-    // Add background music
-    this.backgroundMusic = this.sound.add("room1.mp3", { loop: true });
-    this.backgroundMusic.play();
+
 
       // Stop background music if playing
       if (this.scene.isActive("level01")) {
@@ -430,24 +437,25 @@ class level02 extends Phaser.Scene {
       );
     }
   }
-  collectshirt(player, shirt) {
-    console.log("collectshirt");
-    this.collectSnd.play();
+//   collectshirt(player, shirt) {
+//     console.log("collectshirt");
+//     this.collectSnd.play();
 
-    // Increment the count of collected shirts
-    window.shirt++;
+//     // Increment the count of collected shirts
+//     window.shirt++;
 
-    // Disable the collected shirt item
-    shirt.disableBody(true, true);
+//     // Disable the collected shirt item
+//     shirt.disableBody(true, true);
 
-    // Update the text displaying the number of collected shirts
-    this.shirtCollected.setText("Shirts Collected: " + window.shirt);
-}
+//     // Update the text displaying the number of collected shirts
+//     this.shirtCollected.setText("Shirts Collected: " + window.shirt);
+// }
   hitshirt(player, item) {
     console.log("Hit shirt!!!");
     this.sound.play("collect");
     this.cameras.main.shake(0);
     window.shirt++;
+    this.shirtCollected.setText("Shirts Collected: " + window.shirt);
     item.disableBody(true, true); // remove shirt
     // Create a new shirt sprite at a specific position
     let shirtSprite = this.physics.add.sprite(400, 50, "shirt");
@@ -476,6 +484,8 @@ class level02 extends Phaser.Scene {
 
     if (window.heart < 1) {
       console.log("Jump to game over");
+      window.backgroundMusic.stop();
+
       this.scene.start("gameover",
       {player: this.player, } 
       )
@@ -497,7 +507,7 @@ class level02 extends Phaser.Scene {
 
   // function to jump to winning scene
   levelwin() {
-    this.backgroundMusic.stop();
+    // this.backgroundMusic.stop();
     if (window.shirt <= 3) console.log("winscene");
     this.scene.start("winscene");
   }

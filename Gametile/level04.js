@@ -27,7 +27,7 @@ class level04 extends Phaser.Scene {
     
   create() {
       console.log("animationScene");
-
+      window.backgroundMusic.stop();
       // Step 3 - Create the map from main
       let map = this.make.tilemap({ key: "level4" });
 

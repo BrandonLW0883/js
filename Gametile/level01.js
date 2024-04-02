@@ -27,7 +27,8 @@ create() {
 console.log("animationScene")
 // Step 3 - Create the map from main
 let map = this.make.tilemap({ key: "level1" });
-
+window.backgroundMusic = this.sound.add('pixel.mp3', { loop: true });
+window.backgroundMusic.play();
 // Step 4 Load the game tiles
 let desertTiles = map.addTilesetImage("desert32x32", "desertimg");
 let streetTiles = map.addTilesetImage("Street32x32", "streetimg");
@@ -97,11 +98,7 @@ this.anims.create({
 
 // this.add.sprite(100, 300, 'heart') . play('spin').setScale(1)
 
-  if (this.musicPlaying) {
-    this.backgroundMusic = this.sound.add('pixel.mp3', { loop: true });
-    this.backgroundMusic.play();
-    this.musicPlaying = true;
-}
+
 this.player.setCollideWorldBounds(true);  // don't go out of the this.map
 
 var start = map.findObject("objectlayer", (obj) => obj.name === "start");
@@ -155,9 +152,6 @@ this.physics.add.collider(this.player, this.buildingLayer);
  this.physics.add.collider(this.player, this.treesLayer);
 
 
-  // Add background music
- this.backgroundMusic = this.sound.add('pixel.mp3', { loop: true });
- this.backgroundMusic.play();
 }
 
  // end of create //
@@ -242,22 +236,22 @@ this.physics.add.collider(this.player, this.buildingLayer);
   
     level2(player, tile) {
       console.log("level02 function");
-      this.backgroundMusic.stop();
+
       this.scene.start("level02",);
     }
     level3(player, tile) {
       console.log("level03 function");
-      this.backgroundMusic.stop();
+      // this.backgroundMusic.stop();
       this.scene.start("level03",);
     }
     level4(player, tile) {
       console.log("level04 function");
-      this.backgroundMusic.stop();
+      // this.backgroundMusic.stop();
       this.scene.start("level04",);
     }
     level5(player, tile) {
       console.log("level05 function");
-      this.backgroundMusic.stop();
+      // this.backgroundMusic.stop();
       this.scene.start("level05",);
     }
   }

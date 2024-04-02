@@ -12,23 +12,24 @@ class winscene extends Phaser.Scene {
   
     create() {
         console.log("winscene");
+
+        //window.backgroundMusic.stop();
+
   
         this.add.image(320, 320, "winning1")
         // // Display winning image
         // this.add.image(300, 300, "winning1");
         window.shirt=0
+        // window.backgroundMusic2.stop();
 
-        // Add background music
-    if (!this.musicPlaying) {
-        this.backgroundMusic = this.sound.add('winsound', { loop: true });
-        this.backgroundMusic.play();
-        this.musicPlaying = true;
-      }
+        window.winsoundMusic = this.sound.add('winsound', { loop: false });
+        window.winsoundMusic.play();
+
 
         // Check for spacebar press to restart level
         let spaceDown = this.input.keyboard.addKey('ENTER');
         spaceDown.on('down', function() {
-            this.backgroundMusic.stop();
+            // this.backgroundMusic.stop();
             this.scene.start("level01",
             {player: this.player, } 
             )

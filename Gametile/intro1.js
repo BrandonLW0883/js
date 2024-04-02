@@ -7,10 +7,16 @@ class intro1 extends Phaser.Scene {
     preload(){
        
         this.load.image("introimg", "assets/intro1.png");
+       
+
     }
 
     create() {
         console.log("intro1");
+
+        
+      
+
         this.add.image(320, 320, "introimg")
         this.add.text(130, 160, ' press spacebar to continue',
             { font: '24px Courier', fill: '#9665aa' });
