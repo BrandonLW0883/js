@@ -20,7 +20,7 @@ class winscene extends Phaser.Scene {
         // // Display winning image
         // this.add.image(300, 300, "winning1");
         window.shirt=0
-        // window.backgroundMusic2.stop();
+        window.backgroundMusic2.stop();
 
         window.winsoundMusic = this.sound.add('winsound', { loop: false });
         window.winsoundMusic.play();
@@ -29,7 +29,7 @@ class winscene extends Phaser.Scene {
         // Check for spacebar press to restart level
         let spaceDown = this.input.keyboard.addKey('ENTER');
         spaceDown.on('down', function() {
-            // this.backgroundMusic.stop();
+            // this.backgroundMusic2.stop();
             this.scene.start("level01",
             {player: this.player, } 
             )

@@ -166,11 +166,11 @@ class level02 extends Phaser.Scene {
       repeat: -1,
     });
 
-    if (this.musicPlaying) {
-      this.backgroundMusic = this.sound.add("room1.mp3", { loop: true });
-      this.backgroundMusic.play();
-      this.musicPlaying = true;
-    }
+    // if (this.musicPlaying) {
+    //   this.backgroundMusic2 = this.sound.add("room1.mp3", { loop: true });
+    //   this.backgroundMusic.play();
+    //   this.musicPlaying = true;
+    // }
 
     //this.player = this.physics.add.sprite(146, 176, 'MC');
     //window.player = this.player
@@ -484,7 +484,7 @@ class level02 extends Phaser.Scene {
 
     if (window.heart < 1) {
       console.log("Jump to game over");
-      window.backgroundMusic.stop();
+      window.backgroundMusic2.stop();
 
       this.scene.start("gameover",
       {player: this.player, } 
@@ -499,7 +499,7 @@ class level02 extends Phaser.Scene {
 
   winscene(player, tile) {
     console.log("winscene function");
-    this.backgroundMusic.stop();
+    this.backgroundMusic2.stop();
     
     this.scene.start("winscene"
     )

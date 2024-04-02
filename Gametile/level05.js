@@ -37,6 +37,11 @@ class level05 extends Phaser.Scene {
     // Step 3 - Create the map from main
     let map = this.make.tilemap({ key: "level5" });
 
+  window.backgroundMusic.stop();
+this.backgroundMusic5 = this.sound.add('japanese.mp3', { loop: true });
+this.backgroundMusic5.play();
+
+
     // Step 4 Load the game tiles
     let clothesTiles = map.addTilesetImage("clothes768x768", "clotheimg");
     let interiorTiles = map.addTilesetImage("interior718x1214", "interiorimg");
@@ -90,9 +95,9 @@ class level05 extends Phaser.Scene {
         .setVisible(true)
     );
 
-    // Add background music
-    this.backgroundMusic = this.sound.add("japanese.mp3", { loop: true });
-    this.backgroundMusic.play();
+    // // Add background music
+    // this.backgroundMusic = this.sound.add("japanese.mp3", { loop: true });
+    // this.backgroundMusic.play();
 
     var shirt = map.findObject("ObjectLayer", (obj) => obj.name === "shirt");
     this.shirt = this.physics.add.sprite(shirt.x, shirt.y, "shirt");
@@ -207,11 +212,11 @@ class level05 extends Phaser.Scene {
       repeat: -1,
     });
 
-    if (this.musicPlaying) {
-      this.backgroundMusic = this.sound.add("japanese.mp3", { loop: true });
-      this.backgroundMusic.play();
-      this.musicPlaying = true;
-    }
+    // if (this.musicPlaying) {
+    //   this.backgroundMusic = this.sound.add("japanese.mp3", { loop: true });
+    //   this.backgroundMusic.play();
+    //   this.musicPlaying = true;
+    // }
 
     
  
@@ -847,6 +852,7 @@ class level05 extends Phaser.Scene {
     enemy.disableBody(true, true); // Remove enemy
     if (window.heart < 1) {
       console.log("Jump to game over");
+      this.backgroundMusic5.stop();
       this.scene.start("gameover");
     }
 
@@ -881,9 +887,19 @@ class level05 extends Phaser.Scene {
     item.disableBody(true, true); // Remove shirt
     return false;
   }
-  level1() {
-    console.log("level01 function");
-    this.backgroundMusic.stop();
-    this.scene.start("level01");
+  winscene(player, tile) {
+    console.log("winscene function");
+    this.backgroundMusic5.stop();
+    
+    this.scene.start("winscene"
+    )
+  }
+
+  // function to jump to winning scene
+  levelwin() {
+    this.backgroundMusic5.stop();
+    if (window.shirt <= 3) console.log("winscene");
+    this.scene.start("winscene");
   }
 }
+

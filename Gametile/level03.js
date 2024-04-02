@@ -29,6 +29,11 @@ class level03 extends Phaser.Scene {
         // Step 3 - Create the map from main
         let map = this.make.tilemap({ key: "level3" });
 
+        window.backgroundMusic.stop();      
+
+    window.backgroundMusic3 = this.sound.add('room2.mp3', { loop: true });
+    window.backgroundMusic3.play();
+
         // Step 4 Load the game tiles
         let clothesTiles = map.addTilesetImage("clothes768x768", "clotheimg");
         let interiorTiles = map.addTilesetImage("interior718x1214", "interiorimg");
@@ -178,14 +183,6 @@ class level03 extends Phaser.Scene {
       frameRate:5,
       repeat:-1
   });
-
-  if (this.musicPlaying) {
-    this.backgroundMusic = this.sound.add('room2.mp3', { loop: true });
-    this.backgroundMusic.play();
-    this.musicPlaying = true;
-}
-
-           
     
     //this.player = this.physics.add.sprite(146, 176, 'MC');
     //window.player = this.player
@@ -376,10 +373,10 @@ this.tweens.add({
 
 });
 
-// Add background music
-window.backgroundMusic.stop();
-window.backgroundMusic3 = this.sound.add('room2.mp3', { loop: true });
-window.backgroundMusic3.play();
+// // Add background music
+// window.backgroundMusic.stop();
+// window.backgroundMusic3 = this.sound.add('room2.mp3', { loop: true });
+// window.backgroundMusic3.play();
 
  // Start the countdown timer
  this.startTimer();
@@ -492,7 +489,7 @@ window.backgroundMusic3.play();
 
     level1(player, tile) {
       console.log("winscene function");
-      this.backgroundMusic.stop();
+      this.backgroundMusic3.stop();
       this.scene.start("winscene");
     }
    
@@ -512,7 +509,7 @@ window.backgroundMusic3.play();
       enemy.disableBody(true, true); // Remove enemy
       if (window.heart < 1) {
           console.log("Jump to game over");
-          window.backgroundMusic3 .stop();
+          window.backgroundMusic3.stop();
 
           this.scene.start("gameover");
       }
@@ -526,7 +523,7 @@ window.backgroundMusic3.play();
 
       winscene(player, tile) {
         console.log("winscene function");
-        window.backgroundMusic.stop();
+        window.backgroundMusic3.stop();
         this.scene.start("winscene",);
       }
    // function to jump to winning scene

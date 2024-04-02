@@ -27,9 +27,14 @@ class level04 extends Phaser.Scene {
     
   create() {
       console.log("animationScene");
-      window.backgroundMusic.stop();
       // Step 3 - Create the map from main
       let map = this.make.tilemap({ key: "level4" });
+
+      // Add background music
+
+      window.backgroundMusic.stop();
+this.backgroundMusic4 = this.sound.add('room3.mp3', { loop: true });
+this.backgroundMusic4.play();
 
       // Step 4 Load the game tiles
       let clothesTiles = map.addTilesetImage("clothes768x768", "clotheimg");
@@ -200,11 +205,11 @@ this.anims.create({
     repeat:-1
 });
 
-if (this.musicPlaying) {
-  this.backgroundMusic = this.sound.add('room3.mp3', { loop: true });
-  this.backgroundMusic.play();
-  this.musicPlaying = true;
-}
+// if (this.musicPlaying) {
+//   this.backgroundMusic4 = this.sound.add('room3.mp3', { loop: true });
+//   this.backgroundMusic4.play();
+//   this.musicPlaying = true;
+// }
 
 
 // Find the "start" object
@@ -429,9 +434,7 @@ this.tweens.add({
 });
 
 
-// Add background music
-this.backgroundMusic = this.sound.add('room3.mp3', { loop: true });
-this.backgroundMusic.play();
+
 
  // Start the countdown timer
  this.startTimer();
@@ -552,6 +555,7 @@ hitEnemy(player, enemy) {
       enemy.disableBody(true, true); // Remove enemy
       if (window.heart < 1) {
           console.log("Jump to game over");
+          this.backgroundMusic4.stop();
           this.scene.start("gameover");
       }
 
@@ -562,7 +566,7 @@ hitEnemy(player, enemy) {
   }
   winscene(player, tile) {
     console.log("winscene function");
-    this.backgroundMusic.stop();
+    this.backgroundMusic4.stop();
     
     this.scene.start("winscene"
     )
@@ -570,7 +574,7 @@ hitEnemy(player, enemy) {
 
   // function to jump to winning scene
   levelwin() {
-    this.backgroundMusic.stop();
+    this.backgroundMusic4.stop();
     if (window.shirt <= 3) console.log("winscene");
     this.scene.start("winscene");
   }
