@@ -7,7 +7,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true
+            debug: false
         }
     },
      scale: {
@@ -25,4 +25,3 @@ window.shirt=12
 window.heart=3
 window.dress=12
 window.cm=5
-
