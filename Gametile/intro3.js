@@ -1,27 +1,24 @@
-class preloadScene extends Phaser.Scene {
+class intro3 extends Phaser.Scene {
     constructor() {
-        super('preloadScene');
+        super('intro3');
 
-    }
-    init(data) {
-        this.player=data.player
     }
 
     preload(){
        
-        this.load.image("mainpage", "assets/mainpage.png");
+        this.load.image("intro3img", "assets/intro3.png");
     }
 
     create() {
-        console.log("preloadScene");
-        this.add.image(320, 320, "mainpage")
+        console.log("intro3");
+        this.add.image(320, 320, "intro3img")
         this.add.text(130, 160, ' press spacebar to continue',
             { font: '24px Courier', fill: '#9665aa' });
 
         var spaceDown = this.input.keyboard.addKey('SPACE');
 
         spaceDown.on('down', function () {
-            this.scene.start("intro1");
+            this.scene.start("intro4");
         }, this);
     }
 }

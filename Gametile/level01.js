@@ -15,7 +15,7 @@ this.load.image("desertimg", "assets/desert32x32.png");
 this.load.image("streetimg", "assets/Street32x32.png");
 this.load.image("forestimg", "assets/forest_tiles.png");
 this.load.image("townimg", "assets/town2240x2400.png");
-this.load.audio('pixel.mp3', ['assets/pixel.mp3', 'assets/pixel.png']);
+ this.load.audio('pixel.mp3', ['assets/pixel.mp3', 'assets/pixel.png']);
 
 this.load.spritesheet('MC', 'assets/maincharacter.png', { frameWidth: 64, frameHeight: 64 });
 this.load.spritesheet('heart', 'assets/heart.png', { frameWidth: 64, frameHeight: 64 });
@@ -34,13 +34,7 @@ let streetTiles = map.addTilesetImage("Street32x32", "streetimg");
 let forestTiles = map.addTilesetImage("forest_tiles", "forestimg")
 let townTiles = map.addTilesetImage("town2240x2400", "townimg");
 
-this.anims.create({
-  key:'spin',
-  frames:this.anims.generateFrameNumbers('heart',
-  { start:0, end:-5 }),
-  frameRate:20,
-  repeat:-1
-});
+
 
   //Step 5  create an array of tiles
   
@@ -51,7 +45,6 @@ let tilesArray = [desertTiles, streetTiles, forestTiles, townTiles];
 this.groundLayer = map.createLayer("Ground", tilesArray, 0, 0);
 this.riverLayer = map.createLayer("river", tilesArray,0,0);
 this.buildingLayer = map.createLayer("building", tilesArray, 0, 0);
-this.shopLayer = map.createLayer("shop", tilesArray, 0, 0);
 this.treesLayer = map.createLayer("trees", tilesArray, 0, 0);
 this.lampsLayer = map.createLayer("lamps", tilesArray, 0, 0);
 
@@ -91,6 +84,14 @@ this.anims.create({
   repeat: -1
 });
 
+this.anims.create({
+  key:'spin',
+  frames:this.anims.generateFrameNumbers('heart',
+  { start:0, end:5 }),
+  frameRate:10,
+  repeat:-1
+});
+
 
 // Find the starting position object
 
@@ -101,21 +102,28 @@ this.anims.create({
     this.backgroundMusic.play();
     this.musicPlaying = true;
 }
-
+this.player.setCollideWorldBounds(true);  // don't go out of the this.map
 
 var start = map.findObject("objectlayer", (obj) => obj.name === "start");
 this.player=this.physics.add.sprite(start.x, start.y, 'MC');
 
-var heart = map.findObject("objectlayer", (obj) => obj.name === "heart");
-this.heart=this.physics.add.sprite(heart.x, heart.y, 'heart').setScale (0.5)
+let heart1 = map.findObject("objectlayer", (obj) => obj.name === "heart");
+// Define your items with objectLayer
+this.heart1 = this.physics.add
+.sprite(heart1.x, heart1.y, "heart")
+.play("spin");
+
+
+this.heart = this.add.sprite(230,50, "heart"). play('spin').setScale(0.8).setScrollFactor(0).setVisible(true);
+this.heart2 = this.add.sprite(300,50, "heart").play('spin').setScale(0.8).setScrollFactor(0).setVisible(true);
+this.heart3 = this.add.sprite(370,50, "heart").play('spin').setScale(0.8).setScrollFactor(0).setVisible(true);
 
 window.player=this.player
 
 this.player.body.setSize(this.player.width * 0.4, this.player.height * 0.6)
 
-// When object overlap with player, call the this.collectFire function
-this.physics.add.overlap(this.player, this.heart, this.hitheart, null, this);
 
+this.physics.add.overlap(this.player, this.heart1, this.hitheart, null, this);
  
 // this.physics.add.overlap(this.player, this.heart2, this.hitheart2, null, this);
 
@@ -145,11 +153,9 @@ this.buildingLayer.setCollisionByExclusion(-1, true);
 this.physics.add.collider(this.player, this.buildingLayer);
  this.treesLayer.setCollisionByExclusion(-1, true);
  this.physics.add.collider(this.player, this.treesLayer);
- this.shopLayer.setCollisionByExclusion(-1, true);
- this.physics.add.collider(this.player, this.shopLayer);
 
 
- // Add background music
+  // Add background music
  this.backgroundMusic = this.sound.add('pixel.mp3', { loop: true });
  this.backgroundMusic.play();
 }
@@ -182,19 +188,46 @@ this.physics.add.collider(this.player, this.buildingLayer);
 
     if (
       this.player.x > 372 &&
-      this.player.y > 115 &&
-      this.player.y < 156
+      this.player.y > 147 &&
+      this.player.y < 158
       ) {
         console.log("Door2");
         this.level2();
       }
+      if (
+        this.player.x > 576 &&
+        this.player.y > 243 &&
+        this.player.y < 255
+        ) {
+          console.log("Door3");
+          this.level3();
+        }
+        if (
+          this.player.x > 791 &&
+          this.player.y > 819 &&
+          this.player.y < 822
+          ) {
+            console.log("Door4");
+            this.level4();
+          }
+          if (
+            this.player.x > 1336 &&
+            this.player.y > 467.2 &&
+            this.player.y < 478
+            ) {
+              console.log("Door5");
+              this.level5();
+            }
+     
    
     } // end of update //
 
     // this function is called when player touch the heart
-   hitheart(player, item) {
+   
+   // this function is called when player touch the fire
+  hitheart(player, item) {
     console.log("Hit heart!!!");
-    this.cameras.main.shake(200);
+    this.cameras.main.shake(20);
     item.disableBody(true, true); // remove heart
     return false;
   }
@@ -205,10 +238,27 @@ this.physics.add.collider(this.player, this.buildingLayer);
   //   item.disableBody(true, true); // remove heart
   //   return false;
   
+
+  
     level2(player, tile) {
       console.log("level02 function");
       this.backgroundMusic.stop();
       this.scene.start("level02",);
+    }
+    level3(player, tile) {
+      console.log("level03 function");
+      this.backgroundMusic.stop();
+      this.scene.start("level03",);
+    }
+    level4(player, tile) {
+      console.log("level04 function");
+      this.backgroundMusic.stop();
+      this.scene.start("level04",);
+    }
+    level5(player, tile) {
+      console.log("level05 function");
+      this.backgroundMusic.stop();
+      this.scene.start("level05",);
     }
   }
  
